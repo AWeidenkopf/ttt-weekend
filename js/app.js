@@ -31,6 +31,8 @@ function init() {
   board = new Array(9).fill(null);
   turn = 1
   winner = null
+  messageEl.style.color = "aliceblue";
+  squareEls.forEach((div => div.style.color = "aliceblue"))
   render()
 }
 
@@ -82,9 +84,11 @@ function getWinner() {
       squareEls[winningCombos[i][2]].style.color = "#A3EBB1"
       messageEl.style.color = "#A3EBB1"
       return winner = board[winningCombos[i][0]];
-    } else if (!board.includes(null)) {
-      return winner = "T"
-    } winner = null
+    }
+  }
+
+  if (!board.includes(null)) {
+    return winner = "T"
   }
 }
 
