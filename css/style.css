@@ -17,6 +17,7 @@ body {
 
 section.board {
   display: grid;
+  margin-top: 5vw;
   grid-template-rows: repeat(3, 20vmin);
   grid-template-columns: repeat(3, 20vmin);
   grid-gap: 0vmin;
