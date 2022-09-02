@@ -1,30 +1,20 @@
 /*-------------------------------- Constants --------------------------------*/
 
-
+const winningCombos = [
+  [0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]
+]
 
 /*---------------------------- Variables (state) ----------------------------*/
+// Step 1 - Define the required variables used to track the state of the game
+// 1a) Use a variable named `board` to represent the state of the squares on
+//    the board.
+// 1b) Use a variable named `turn` to track whose turn it is.
+// 1c) Use a variable named `winner` to represent if anyone has won yet, or 
+//    if a tie has occurred.
 
-
+let board, turn, winner
 
 /*------------------------ Cached Element References ------------------------*/
-
-
-
-/*----------------------------- Event Listeners -----------------------------*/
-
-
-
-/*-------------------------------- Functions --------------------------------*/
-
-// Step 1 - Define the required variables used to track the state of the game
-
-  // 1a) Use a variable named `board` to represent the state of the squares on
-  //    the board.
-
-  // 1b) Use a variable named `turn` to track whose turn it is.
-
-  // 1c) Use a variable named `winner` to represent if anyone has won yet, or 
-  //    if a tie has occurred.
 
 // Step 2 - Store cached element references
 
@@ -34,7 +24,17 @@
   // 2b) In a constant called `messageEl`, store the element that displays the 
   //    game's status on the page.
 
+  const messageEl = document.getElementById("message")
+  const squareEls = Array.from(document.querySelectorAll("div"))
+  
 
+//to create an array from the elements just use the Array.from and then we get the divs elements
+//if we get the .section we would get array with a singular element. Te entire container
+/*----------------------------- Event Listeners -----------------------------*/
+
+document.querySelector(".board").addEventListener("click", handleClick)
+
+/*-------------------------------- Functions --------------------------------*/
 // Step 3 - Upon loading, the game state should be initialized, and a function 
 //          should be called to render this game state
 
@@ -51,10 +51,20 @@
 
   // 3f) Call a function called `render` at the end of the `init` function.
 
-// Step 4 - The state of the game should be rendered to the user
-
+  init()
+  
+  function init(){
+    board = new Array(9).fill(null);
+    turn = 1
+    winner = null
+    console.log(board)
+    render() 
+  }
+  
+  // Step 4 - The state of the game should be rendered to the user
+  
   // 4a) Create a function called `render`.
-
+  
   // 4b) Loop over `board` and for each element:
   //     - Use the current index of the iteration to access the corresponding 
   //       square in the `squareEls` array.
@@ -68,15 +78,51 @@
   //     - If `winner` is equal to `'T'` (tie), render a tie message.
   //     - Otherwise, render a congratulatory message to the player that has 
   //       won.
-    
-
-// Step 5 - Define the required constants
-
+  
+  
+  function render(){
+    for(e in board){
+    if(board[e] === 1){
+        squareEls[e].setAttribute("class", "x") 
+       
+      } else if(board[e] === -1){
+        squareEls[e].setAttribute("class", "o")
+        
+      }
+      if(winner === null){
+        messageEl.textContent = `${turn} is your turn!`
+       } else if (winner === "T"){
+        messageEl.textContent = `It's a tie!`
+       }else {
+       messageEl.textContent = `Congratulations, ${turn} you won!`
+      }
+       
+    }}
+  
+  
+  
+  // Step 5 - Define the required constants
+  
   // 5a) In a constant called `winningCombos` define the eight possible winning 
   //     combinations as an array of arrays.
+  
+  // Step 6 - Handle a player clicking a square with a `handleClick` function
+  
+  function handleClick(evt){
+    let sqIdx = parseInt(evt.target.id.replace("sq", ""))
+    console.log(board[sqIdx])
+    if(board[sqIdx]) {
+      return
+    }
+    if(winner !== null){
+      return
+    } else {
+      board[sqIdx] = turn *= -1;
+    }
 
-// Step 6 - Handle a player clicking a square with a `handleClick` function
-
+    render()
+    console.log(board)
+  }
   // 6a) Create a function called `handleClick`. It will have an `evt`
   //     parameter.
 
@@ -109,7 +155,9 @@
 // Step 7 - Build the `getWinner` function
 
   // 7a) Create a function called `getWinner`
-
+function getWinner(){
+  winningCombos.forEach(el => console.log(el))
+}
   /* 
    * There are two methods you can use to find out if there is a winner.
    *
