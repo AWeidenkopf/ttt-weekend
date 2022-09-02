@@ -77,6 +77,10 @@ function getWinner() {
   for (i = 0; i < winningCombos.length; i++) {
     let sum = Math.abs(board[winningCombos[i][0]] + board[winningCombos[i][1]] + board[winningCombos[i][2]])
     if (sum === 3) {
+      squareEls[winningCombos[i][0]].style.color = "#A3EBB1"
+      squareEls[winningCombos[i][1]].style.color = "#A3EBB1"
+      squareEls[winningCombos[i][2]].style.color = "#A3EBB1"
+      messageEl.style.color = "#A3EBB1"
       return winner = board[winningCombos[i][0]];
     } else if (!board.includes(null)) {
       return winner = "T"
