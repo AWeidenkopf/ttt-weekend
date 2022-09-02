@@ -102,4 +102,4 @@ function getWinner() {
 //if the turn is -1 then is computers turn and I would need to call the 
 // computer turn fn
 
-// now I need to flip the turn again so it's player's one turn
+// now I need to flip the turn again so it's player's turn
