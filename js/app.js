@@ -55,7 +55,7 @@ function render() {
   }
 
   if (winner === null) {
-    messageEl.textContent = `Is your turn!`
+    messageEl.textContent = `It's your turn!`
   } else if (winner === "T") {
     messageEl.textContent = `It's a tie!`
   } else if (winner === -1) {
