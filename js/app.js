@@ -6,7 +6,7 @@ const winningCombos = [
 
 /*---------------------------- Variables (state) ----------------------------*/
 
-let board, winner, turn, player
+let board, winner, turn, player, num
 
 /*------------------------ Cached Element References ------------------------*/
 
@@ -50,6 +50,7 @@ function render() {
     player = "Player 1 (x)"
   } else {
     player = "Player 2 (o)"
+    computerChoice()
   }
 
   if (winner === null) {
@@ -74,7 +75,18 @@ function handleClick(evt) {
   getWinner()
   render()
 }
+function computerChoice(){
+  num = Math.floor(Math.random() *9)
+  console.log(num)
+  board[num] = turn;
+  turn *= -1;
+  getWinner()
+  render() 
+  }
 
+function turns(){
+  
+}
 function getWinner() {
   for (i = 0; i < winningCombos.length; i++) {
     let sum = Math.abs(board[winningCombos[i][0]] + board[winningCombos[i][1]] + board[winningCombos[i][2]])
