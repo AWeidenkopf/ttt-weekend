@@ -33,11 +33,26 @@ function init() {
   winner = null
   messageEl.style.color = "aliceblue";
   squareEls.forEach((div => div.style.color = "aliceblue"))
-  squareEls.forEach((div => div.style.cursor= "pointer"))
+  squareEls.forEach((div => div.style.cursor = "pointer"))
   render()
 }
 
 function render() {
+
+  if (turn === 1) {
+    msg = "It's your turn!"
+    squareEls.forEach(function (div) {
+      if (div.textContent !== "") {
+        squareEls.forEach((div => div.style.cursor = "pointer"))
+      }
+    })
+  } else {
+    squareEls.forEach((div => div.style.cursor = "not-allowed"))
+    if (winner === null) {
+      msg = "Computer's turn"
+      setTimeout(computerChoice, 3000)
+    }
+  }
   for (idx in board) {
     if (board[idx] === 1) {
       squareEls[idx].textContent = "x";
@@ -47,15 +62,6 @@ function render() {
       squareEls[idx].style.cursor = "not-allowed"
     } else if (board[idx] === null)
       squareEls[idx].textContent = "";
-  }
-
-  if (turn === 1) {
-    msg = "It's your turn!"
-  } else {
-    if (winner === null) {
-      msg = "Computer's turn"
-      setTimeout(computerChoice, 3000)
-    }
   }
 
   if (winner === null) {
@@ -71,17 +77,20 @@ function render() {
 
 
 function handleClick(evt) {
-  if(turn === 1){
-  let sqIdx = parseInt(evt.target.id.replace("sq", ""))
-  if (board[sqIdx] !== null || winner !== null) {
+  if (turn === -1) {
     return
+  } else if (turn === 1) {
+    let sqIdx = parseInt(evt.target.id.replace("sq", ""))
+    if (board[sqIdx] !== null || winner !== null) {
+      return
+    }
+    board[sqIdx] = turn;
+    turn *= -1;
+    getWinner()
+    render()
   }
-  board[sqIdx] = turn;
-  turn *= -1;
-  getWinner()
-  render()
 }
-}
+
 
 function computerChoice() {
   num = Math.floor(Math.random() * 9)
