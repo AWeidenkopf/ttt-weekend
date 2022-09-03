@@ -71,6 +71,7 @@ function render() {
 
 
 function handleClick(evt) {
+  if(turn === 1){
   let sqIdx = parseInt(evt.target.id.replace("sq", ""))
   if (board[sqIdx] !== null || winner !== null) {
     return
@@ -79,6 +80,7 @@ function handleClick(evt) {
   turn *= -1;
   getWinner()
   render()
+}
 }
 
 function computerChoice() {
