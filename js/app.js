@@ -76,17 +76,18 @@ function handleClick(evt) {
   render()
 }
 function computerChoice(){
-  num = Math.floor(Math.random() *9)
+    num = Math.floor(Math.random() *9)
   console.log(num)
-  board[num] = turn;
-  turn *= -1;
-  getWinner()
-  render() 
+  if(squareEls[num].textContent) {
+    computerChoice()
+  } else {
+    board[num] = turn;
+    turn *= -1;
+    getWinner()
+    render() 
   }
-
-function turns(){
-  
 }
+
 function getWinner() {
   for (i = 0; i < winningCombos.length; i++) {
     let sum = Math.abs(board[winningCombos[i][0]] + board[winningCombos[i][1]] + board[winningCombos[i][2]])
