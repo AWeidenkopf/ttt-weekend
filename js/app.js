@@ -58,7 +58,7 @@ function render() {
   } else if (winner === "T") {
     messageEl.textContent = `It's a tie!`
   } else if (winner === -1) {
-    messageEl.textContent = `Congratulations, Player 2 (o), you won!`
+    messageEl.textContent = `Computer wins !`
   } else {
     messageEl.textContent = `Congratulations, Player 1 (x), you won!`
   }
@@ -75,16 +75,17 @@ function handleClick(evt) {
   getWinner()
   render()
 }
-function computerChoice(){
-    num = Math.floor(Math.random() *9)
+
+function computerChoice() {
+  num = Math.floor(Math.random() * 9)
   console.log(num)
-  if(squareEls[num].textContent) {
+  if (squareEls[num].textContent) {
     computerChoice()
   } else {
     board[num] = turn;
     turn *= -1;
+    render()
     getWinner()
-    render() 
   }
 }
 
@@ -92,10 +93,17 @@ function getWinner() {
   for (i = 0; i < winningCombos.length; i++) {
     let sum = Math.abs(board[winningCombos[i][0]] + board[winningCombos[i][1]] + board[winningCombos[i][2]])
     if (sum === 3) {
-      squareEls[winningCombos[i][0]].style.color = "#A3EBB1"
-      squareEls[winningCombos[i][1]].style.color = "#A3EBB1"
-      squareEls[winningCombos[i][2]].style.color = "#A3EBB1"
-      messageEl.style.color = "#A3EBB1"
+      if (board[winningCombos[i][0]] === 1) {
+        squareEls[winningCombos[i][0]].style.color = "#A3EBB1"
+        squareEls[winningCombos[i][1]].style.color = "#A3EBB1"
+        squareEls[winningCombos[i][2]].style.color = "#A3EBB1"
+        messageEl.style.color = "#A3EBB1"
+      } else {
+        squareEls[winningCombos[i][0]].style.color = "#ff3333"
+        squareEls[winningCombos[i][1]].style.color = "#ff3333"
+        squareEls[winningCombos[i][2]].style.color = "#ff3333"
+        messageEl.style.color = "#ff3333"
+      }
       return winner = board[winningCombos[i][0]];
     }
   }
