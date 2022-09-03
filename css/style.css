@@ -16,6 +16,10 @@ body {
   border-top: 12px ridge tan;
 }
 
+h2 {
+  display: inline-block;
+  animation: pulse infinite;
+}
 
 section.board {
   display: grid;

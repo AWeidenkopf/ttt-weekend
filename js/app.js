@@ -6,7 +6,7 @@ const winningCombos = [
 
 /*---------------------------- Variables (state) ----------------------------*/
 
-let board, winner, turn, player, num
+let board, winner, turn, msg
 
 /*------------------------ Cached Element References ------------------------*/
 
@@ -50,15 +50,16 @@ function render() {
   }
 
   if (turn === 1) {
-    player = "Player 1 (x)"
+    msg = "It's your turn!"
   } else {
     if (winner === null) {
-      setTimeout(computerChoice, 500)
+      msg = "Computer's turn"
+      setTimeout(computerChoice, 3000)
     }
   }
 
   if (winner === null) {
-    messageEl.textContent = `It's your turn!`
+    messageEl.textContent = `${msg}`
   } else if (winner === "T") {
     messageEl.textContent = `It's a tie!`
   } else if (winner === -1) {
@@ -108,6 +109,7 @@ function getWinner() {
         squareEls[winningCombos[i][2]].style.color = "#de6262"
         messageEl.style.color = "#de6262"
       }
+      messageEl.style.animation = "none";
       return winner = board[winningCombos[i][0]];
     }
   }
