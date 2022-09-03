@@ -33,6 +33,7 @@ function init() {
   winner = null
   messageEl.style.color = "aliceblue";
   squareEls.forEach((div => div.style.color = "aliceblue"))
+  squareEls.forEach((div => div.style.cursor= "pointer"))
   render()
 }
 
@@ -40,8 +41,10 @@ function render() {
   for (idx in board) {
     if (board[idx] === 1) {
       squareEls[idx].textContent = "x";
+      squareEls[idx].style.cursor = "not-allowed"
     } else if (board[idx] === -1) {
       squareEls[idx].textContent = "o";
+      squareEls[idx].style.cursor = "not-allowed"
     } else if (board[idx] === null)
       squareEls[idx].textContent = "";
   }
