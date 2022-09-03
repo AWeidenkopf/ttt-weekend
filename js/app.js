@@ -32,6 +32,7 @@ function init() {
   turn = 1
   winner = null
   messageEl.style.color = "aliceblue";
+  messageEl.setAttribute("class", "animate__animated animate__pulse")
   squareEls.forEach((div => div.style.color = "aliceblue"))
   squareEls.forEach((div => div.style.cursor = "pointer"))
   render()
@@ -50,7 +51,7 @@ function render() {
     squareEls.forEach((div => div.style.cursor = "not-allowed"))
     if (winner === null) {
       msg = "Computer's turn"
-      setTimeout(computerChoice, 3000)
+      setTimeout(computerChoice, 1000)
     }
   }
   for (idx in board) {
@@ -120,12 +121,13 @@ function getWinner() {
         squareEls[winningCombos[i][2]].style.color = "#de6262"
         messageEl.style.color = "#de6262"
       }
-      messageEl.style.animation = "none";
+      messageEl.removeAttribute("class")
       return winner = board[winningCombos[i][0]];
     }
   }
 
   if (!board.includes(null)) {
+    messageEl.removeAttribute("class")
     return winner = "T"
   }
 }

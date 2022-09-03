@@ -18,7 +18,7 @@ body {
 
 h2 {
   display: inline-block;
-  animation: pulse infinite;
+  animation: animate__pulse infinite;
 }
 
 section.board {
