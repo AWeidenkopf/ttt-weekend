@@ -50,7 +50,7 @@ function render() {
     player = "Player 1 (x)"
   } else {
     if (winner === null) {
-      computerChoice()
+      setTimeout(computerChoice, 500)
     }
   }
 
