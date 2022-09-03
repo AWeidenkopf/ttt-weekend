@@ -49,18 +49,19 @@ function render() {
   if (turn === 1) {
     player = "Player 1 (x)"
   } else {
-    player = "Player 2 (o)"
-    computerChoice()
+    if (winner === null) {
+      computerChoice()
+    }
   }
 
   if (winner === null) {
-    messageEl.textContent = `${player} is your turn!`
+    messageEl.textContent = `Is your turn!`
   } else if (winner === "T") {
     messageEl.textContent = `It's a tie!`
   } else if (winner === -1) {
-    messageEl.textContent = `Computer wins !`
+    messageEl.textContent = `Computer wins!`
   } else {
-    messageEl.textContent = `Congratulations, Player 1 (x), you won!`
+    messageEl.textContent = `Congratulations, you won!`
   }
 }
 
@@ -84,8 +85,8 @@ function computerChoice() {
   } else {
     board[num] = turn;
     turn *= -1;
-    render()
     getWinner()
+    render()
   }
 }
 
@@ -94,15 +95,15 @@ function getWinner() {
     let sum = Math.abs(board[winningCombos[i][0]] + board[winningCombos[i][1]] + board[winningCombos[i][2]])
     if (sum === 3) {
       if (board[winningCombos[i][0]] === 1) {
-        squareEls[winningCombos[i][0]].style.color = "#A3EBB1"
-        squareEls[winningCombos[i][1]].style.color = "#A3EBB1"
-        squareEls[winningCombos[i][2]].style.color = "#A3EBB1"
-        messageEl.style.color = "#A3EBB1"
+        squareEls[winningCombos[i][0]].style.color = "#9dda89"
+        squareEls[winningCombos[i][1]].style.color = "#9dda89"
+        squareEls[winningCombos[i][2]].style.color = "#9dda89"
+        messageEl.style.color = "#9dda89"
       } else {
-        squareEls[winningCombos[i][0]].style.color = "#ff3333"
-        squareEls[winningCombos[i][1]].style.color = "#ff3333"
-        squareEls[winningCombos[i][2]].style.color = "#ff3333"
-        messageEl.style.color = "#ff3333"
+        squareEls[winningCombos[i][0]].style.color = "#de6262"
+        squareEls[winningCombos[i][1]].style.color = "#de6262"
+        squareEls[winningCombos[i][2]].style.color = "#de6262"
+        messageEl.style.color = "#de6262"
       }
       return winner = board[winningCombos[i][0]];
     }
